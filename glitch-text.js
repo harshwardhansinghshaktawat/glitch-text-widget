@@ -46,9 +46,18 @@ class GlitchText extends HTMLElement {
         const letterSpan = document.createElement('span');
         letterSpan.classList.add('animated-element');
         letterSpan.setAttribute('aria-hidden', 'true');
-        letterSpan.innerHTML = letter === ' ' ? '&nbsp;' : letter;
+        letterSpan.innerHTML = letter === ' ' ? ' ' : letter;
         span.appendChild(letterSpan);
       });
+
+      // Add a space after each word except the last one
+      if (i < splitedText.length - 1) {
+        const spaceSpan = document.createElement('span');
+        spaceSpan.innerHTML = ' '; // Regular space
+        spaceSpan.style.display = 'inline-block';
+        spaceSpan.style.minWidth = '0.5rem'; // Ensure space is visible
+        container.appendChild(spaceSpan);
+      }
     });
   }
 
@@ -95,7 +104,7 @@ class GlitchText extends HTMLElement {
 
         .animated-title span {
           display: inline-block;
-          min-width: 1rem;
+          min-width: 0.2rem; /* Reduced to avoid excessive spacing */
         }
 
         .animated-word {
